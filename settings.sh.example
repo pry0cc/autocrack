@@ -1,4 +1,5 @@
 wordlist="/path/to/rockyou.txt"
-rules="/path/to/OneRuleToRuleThemAll.rule"
+rules1="/path/to/OneRuleToRuleThemAll.rule"
+rules2="/path/to/OneRuleToRuleThemAll.rule"
 telegram_key="<telegram key>"
 chat_id="<telegram chat id>"
