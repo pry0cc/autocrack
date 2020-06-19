@@ -22,7 +22,7 @@ crack() {
     outfile="cracked/$name"
     infile="hashes/$name"
     time_started=$(date +%D-%T)
-    job="{\"job\":\"$name\",\"wordlist\":\"$wordlist\",\"rules\":\"$rules\",\"mode\":\"$mode\", \"time_started\":\"$time_started\"}"
+    job="{\"job\":\"$name\",\"wordlist\":\"$wordlist\",\"rules\":\"$rules1\",\"mode\":\"$mode\", \"time_started\":\"$time_started\"}"
     echo $job | jq > status.json
     echo $job >> jobs_log.json
 
@@ -30,7 +30,8 @@ crack() {
     
     # You should load up your full list here
     echo "Starting hashcat..."
-    hashcat -a 0 -m $mode $infile -o $outfile $wordlist -r $rules 
+    hashcat -a 0 -m $mode $infile -o $outfile $wordlist -r $rules1
+    hashcat -a 0 -m $mode $infile -o $outfile $wordlist -r $rules2 
 }
 
 check_crack() {
