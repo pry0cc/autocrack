@@ -19,9 +19,11 @@ post '/submit' do
         if params[:key] == master_key
             # Authed
             puts "we auth!"
-            open('/tmp/hashpipe', 'a') do |f|
-                f.puts params[:hash]
-            end
+            Thread.new {
+                open('/tmp/hashpipe', 'a') do |f|
+                    f.puts params[:hash]
+                end
+            }
         end
     end    
 end
