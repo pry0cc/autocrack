@@ -6,7 +6,10 @@ mkdir -p cracked
 mkdir -p hashes
 pipe=/tmp/hashpipe
 
-trap "rm -f $pipe" EXIT
+ruby server.rb 2>> /dev/null &
+RUBY_PID=$!
+
+trap "rm -f $pipe && kill -9 $RUBY_PID" EXIT
 
 if [[ ! -p $pipe ]]; then
     mkfifo $pipe
@@ -42,6 +45,7 @@ check_crack() {
         curl -s -X POST -H 'Content-Type: application/json' -d "{\"chat_id\": \"$chat_id\", \"text\": \"Hash cracked successfully!: $name:$password :)\"}" https://api.telegram.org/bot$telegram_key/sendMessage
     else
         echo "$name: did not crack..."
+        curl -s -X POST -H 'Content-Type: application/json' -d "{\"chat_id\": \"$chat_id\", \"text\": \"Hash: $name did not crack :( \"}" https://api.telegram.org/bot$telegram_key/sendMessage
     fi
 }
 
