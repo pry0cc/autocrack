@@ -27,6 +27,7 @@ crack() {
     echo $job >> jobs_log.json
 
     echo $line >> $infile
+    echo $line >> "hashes/hashes-log.txt"
     
     # You should load up your full list here
     echo "Starting hashcat..."
